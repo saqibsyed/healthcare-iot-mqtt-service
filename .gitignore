@@ -1,0 +1,228 @@
+Gitignore for Java,maven,Eclipse,Spring
+#.gitignore
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+
+# Created by https://www.gitignore.io/api/git,java,maven,eclipse,windows
+
+### Eclipse ###
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Annotation Processing
+.apt_generated/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
+
+### Eclipse Patch ###
+# Eclipse Core
+.project
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# Annotation Processing
+.apt_generated
+
+.sts4-cache/
+
+### Git ###
+# Created by git for backups. To disable backups in Git:
+# $ git config --global mergetool.keepBackup false
+*.orig
+
+# Created by git when using merge tools for conflicts
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*_BACKUP_*.txt
+*_BASE_*.txt
+*_LOCAL_*.txt
+*_REMOTE_*.txt
+
+### Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+
+# End of https://www.gitignore.io/api/git,java,maven,eclipse,windows
+@ivanrododendro
+ivanrododendro commented on Sep 30, 2019
+great
+
+@DooWonJang
+DooWonJang commented on Mar 14, 2020
+Thanks.
+That's what I am searching for.
+
+@a-solano
+a-solano commented on Jul 26, 2020
+Awesome!
+
+@sameesh-s
+sameesh-s commented on Sep 1, 2020
+.mvn/wrapper/MavenWrapperDownloader.java do this file is needed in the version control? can we ignore the whole .mvn directory?
+
+@Avinashachu007
+Owner
+Author
+Avinashachu007 commented on Sep 11, 2020
+.mvn/wrapper/MavenWrapperDownloader.java do this file is needed in the version control? can we ignore the whole .mvn directory?
+
+Yes you can ignore entire .mvn directory
+
+@Jarvis-24
+Jarvis-24 commented on Sep 30, 2020
+what about application.prpoerties
+
+@Avinashachu007
+Owner
+Author
+Avinashachu007 commented on Oct 9, 2020
+what about application.prpoerties
+
+Since most of the spring boot project will not run without application.properties, We cannot .gitignore the properties files.
+
+@bogere
+bogere commented on Oct 28, 2020
+what about application.prpoerties
+
+Since most of the spring boot project will not run without application.properties, We cannot .gitignore the properties files.
+
+Application secrets cannot be pushed to the git repository... it is better to use a template instead
+
+@saqibsyed
+ 
+Leave a comment
+No file chosen
+Attach files by dragging & dropping, selecting or pasting them.
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

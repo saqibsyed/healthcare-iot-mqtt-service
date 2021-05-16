@@ -1,19 +1,17 @@
-package com.iot.mqttdemo.service;
+package com.healthcare.iot.service;
 
 import java.util.LinkedList;
 
-import org.eclipse.paho.client.mqttv3.IMqttClient;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.iot.mqttdemo.entity.MessageEntity;
+import com.healthcare.iot.entity.MessageEntity;
 
 @Service
 public class SubscriberImpl implements MqttCallback {

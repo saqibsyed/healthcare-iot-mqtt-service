@@ -1,4 +1,4 @@
-package com.iot.mqttdemo.config;
+package com.healthcare.iot.config;
 
 public class MqttConfiguration {
 

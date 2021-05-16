@@ -1,4 +1,4 @@
-package com.iot.mqttdemo.entity;
+package com.healthcare.iot.entity;
 
 public class MessageEntity {
 	private Boolean docStatus;

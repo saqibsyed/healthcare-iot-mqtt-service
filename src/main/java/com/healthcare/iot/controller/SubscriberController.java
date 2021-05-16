@@ -1,11 +1,11 @@
-package com.iot.mqttdemo.controller;
+package com.healthcare.iot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.iot.mqttdemo.entity.MessageEntity;
-import com.iot.mqttdemo.service.SubscriberImpl;
+import com.healthcare.iot.entity.MessageEntity;
+import com.healthcare.iot.service.SubscriberImpl;
 
 @RestController
 public class SubscriberController {

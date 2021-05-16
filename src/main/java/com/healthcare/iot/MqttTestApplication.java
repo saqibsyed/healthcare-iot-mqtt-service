@@ -1,4 +1,4 @@
-package com.iot.mqttdemo;
+package com.healthcare.iot;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
