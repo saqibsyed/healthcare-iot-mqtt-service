@@ -1,6 +1,12 @@
 package com.healthcare.iot.service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -11,54 +17,30 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.healthcare.iot.entity.MessageEntity;
+import com.healthcare.iot.entity.MqttSubscribedMsg;
+import com.healthcare.iot.repository.MessageRepo;
 
 @Service
 public class SubscriberImpl implements MqttCallback {
-	/** The broker url. */
-	private static final String brokerUrl = "tcp://127.0.0.1:1883";
 
-	/** The client id. */
-	private static final String clientId = "JavaSample";
+	public String messageConsumed;
 
-	/** The topic. */
-	private static final String topic = "topic";
-
-	public String messageReceived;
-
-	public LinkedList<MessageEntity> list = new LinkedList<>();
+	public LinkedList<MqttSubscribedMsg> list = new LinkedList<>();
+	//public LinkedList<String> list = new LinkedList<>();
 
 	@Autowired
 	private MqttClient mqttClient;
+	
+	@Autowired
+	private MessageRepo messageRepo;
 
-	/*
-	 * public static void main(String[] args) {
-	 * 
-	 * new SubscriberImpl().subscribe(topic); }
-	 */
-
-	public void subscribe(String topic) {
-		MemoryPersistence persistence = new MemoryPersistence();
+	public void subscribe(String[] topics) {
+		// MemoryPersistence persistence = new MemoryPersistence();
 		try {
-
-			// MqttClient sampleClient = new MqttClient(brokerUrl, clientId, persistence);
-			// MqttConnectOptions connOpts = new MqttConnectOptions();
-			// connOpts.setCleanSession(true);
-
-			System.out.println("checking");
-
-			//System.out.println("Mqtt Connecting to broker: " + brokerUrl);
-			// sampleClient.connect(connOpts);
-			System.out.println("Mqtt Connected");
-
-			// sampleClient.setCallback(this);
-			// sampleClient.subscribe(topic);
-
+			System.out.println(topics);
 			mqttClient.setCallback(this);
-			mqttClient.subscribe(topic);
-
-			System.out.println("Subscribed");
-			System.out.println("Listening");
+			mqttClient.subscribe(topics);
+			System.out.println("Listening after callBack");
 
 		} catch (MqttException me) {
 			System.out.println("Mqtt reason " + me.getReasonCode());
@@ -82,19 +64,31 @@ public class SubscriberImpl implements MqttCallback {
 	public void messageArrived(String topic, MqttMessage message) throws Exception {
 		System.out.println("Mqtt topic : " + topic);
 		System.out.println("Mqtt msg : " + message.toString());
-		// messageReceived = message.toString();
-		MessageEntity entity = new MessageEntity();
-		entity.setDocStatus(true);
-		entity.setEpochTime(System.currentTimeMillis());
-		entity.setMsg(message.toString());
+		messageConsumed = message.toString();
+		System.out.println(messageConsumed);
+		MqttSubscribedMsg entity = new MqttSubscribedMsg();
+		
+		if(topic.equals("status_check")) {
+		//sample sresponse => Device_status_25=Sanitized, Epoch=1621081041
+		entity.setId(UUID.randomUUID().toString());
+		entity.setDeviceId(messageConsumed.substring(14, 16));
+		entity.setDeviceStatus(messageConsumed.substring(17, 26));
+		LocalDateTime ldt = Instant.ofEpochSecond(Long.valueOf(messageConsumed.substring(34))).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		entity.setTimeStamp(ldt.toString());
+		messageRepo.save(entity);
+		}
+		if(topic.equals("Doctor_name")) {
+			entity.setDeviceUser(messageConsumed.toString());
+		}
 		list.add(entity);
 	}
 
-	public MessageEntity getMessage() {
-		if (list.size() > 0) {
-			return list.getLast();
+	public List<MqttSubscribedMsg> getMessage() {
+		List<MqttSubscribedMsg> MqttSubMsgList = messageRepo.findAll();
+		if (!MqttSubMsgList.isEmpty()) {
+			return MqttSubMsgList;
 		} else {
-			return new MessageEntity();
+			return new ArrayList<>();
 		}
 	}
 
